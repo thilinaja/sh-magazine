@@ -31,7 +31,9 @@ Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Control
 Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
     //Route::get('/', 'PagesController@app')->name('app');
 
-	Route::get('/', [MagazineController::class, 'browse']);
+    Route::get('/', 'MagazineController@browse')->name('app');
+
+	//Route::get('/', [MagazineController::class, 'browse']);
 
 	Route::get('/view/{magazine}', [MagazineController::class, 'show'])->name('magazines.read');
 	Route::post('/time/{magazine}', [MagazineController::class, 'time'])->name('magazines.time');
