@@ -14,31 +14,22 @@ use App\Http\Controllers\MagazineController;
 |
 */
 
-// Route::get('/', [MagazineController::class, 'browse']);
 
-// Route::get('/view/{magazine}', [MagazineController::class, 'show'])->name('magazines.read');
-// Route::post('/time/{magazine}', [MagazineController::class, 'time'])->name('magazines.time');
-
-// Route::resource('/magazines', MagazineController::class);
-
-Route::redirect('/', 'login');
 
 Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers'], function(){
     Route::get('login', 'AuthController@login')->name('login');
     Route::get('connect', 'AuthController@connect')->name('connect');
 });
 
-Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
-    //Route::get('/', 'PagesController@app')->name('app');
+Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'namespace' => 'App\Http\Controllers'], function(){
+    Route::get('/info', 'PagesController@app')->name('info');
 
-    Route::get('/', 'MagazineController@browse')->name('app');
-
-	//Route::get('/', [MagazineController::class, 'browse']);
+	Route::get('/', [MagazineController::class, 'browse']);
 
 	Route::get('/view/{magazine}', [MagazineController::class, 'show'])->name('magazines.read');
 	Route::post('/time/{magazine}', [MagazineController::class, 'time'])->name('magazines.time');
 
 	Route::resource('/magazines', MagazineController::class);
     
-    Route::get('logout', 'Auth\AuthController@logout')->name('logout');
+    Route::get('logout', 'AuthController@logout')->name('logout');
 });
