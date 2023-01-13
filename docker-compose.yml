@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  shmagazine:
+    image: shmagazine
+    build:
+      context: .
+      dockerfile: ./Dockerfile

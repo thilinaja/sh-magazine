@@ -1,8 +1,4 @@
-# Dockerfile
-FROM php:8.2-apache
-
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-RUN a2enmod rewrite
-
-ADD . /var/www
-ADD ./public /var/www/html
+FROM docker/whalesay:latest
+LABEL Name=shmagazine Version=0.0.1
+RUN apt-get -y update && apt-get install -y fortunes
+CMD ["sh", "-c", "/usr/games/fortune -a | cowsay"]
